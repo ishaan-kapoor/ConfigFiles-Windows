@@ -1,0 +1,56 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  q w e r t y u i o p
+  caps a s d f g h j k l ; '
+  z x c v b n m , . /
+)
+
+(defvar
+  tap-time 150
+  hold-time 200
+  left-hand-keys (
+    q w e r t
+    a s d f g
+    z x c v b
+  )
+  right-hand-keys (
+    y u i o p
+    h j k l ;
+    n m , . /
+  )
+)
+
+(defalias
+  cap (tap-hold 100 100 esc (layer-while-held nums))
+  bas (tap-hold 100 100 esc (layer-switch base))
+  nml (tap-hold 100 100 esc (layer-switch normal))
+  a (tap-hold $tap-time $hold-time a lctrl)
+  s (tap-hold $tap-time $hold-time s lmet)
+  d (tap-hold $tap-time $hold-time d lalt)
+  f (tap-hold $tap-time $hold-time f lsft)
+  j (tap-hold $tap-time $hold-time j rsft)
+  k (tap-hold $tap-time $hold-time k ralt)
+  l (tap-hold $tap-time $hold-time l rmet)
+  ; (tap-hold $tap-time $hold-time ; rctrl)
+)
+
+(deflayer base
+  _ _ _ _ _ _ _ _ _ _
+  @cap @a @s @d @f _ _ @j @k @l @; _
+  _ _ _ _ _ _ _ _ _ _
+)
+
+(deflayer nums
+  _ _ _ _ _ grv 1 2 3 4
+  _ _ _ _ @nml _ bspc 5 6 7 8 ret
+  _ _ _ _ _ \ 9 0 - =
+)
+
+(deflayer normal
+  _ _ _ _ _ _ _ _ _ _
+  @bas _ _ _ _ _ _ _ _ _ _ _
+  _ _ _ _ _ _ _ _ _ _
+)
