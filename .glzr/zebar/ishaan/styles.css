@@ -4,6 +4,23 @@
  */
 @import 'https://www.nerdfonts.com/assets/css/webfont.css';
 
+.trigger-area {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 100%;
+  z-index: 1000;
+  cursor: pointer;
+}
+.app.hidden {
+  display: none;
+}
+#root.hidden {
+  background: none;
+  border-bottom: none;
+}
+
 i {
   color: rgb(115 130 175 / 95%);
   margin-right: 7px;
@@ -113,3 +130,4 @@ body,
   left: -8px;
   top: 3px;
 }
+
