@@ -48,6 +48,7 @@
         const [output, setOutput] = useState(providers.outputMap);
         const [clicked, setClicked] = useState(false);
         const [clickedModule, setClickedModule] = useState('');
+        const [isHidden, setIsHidden] = useState(false);
 
         useEffect(() => {
           providers.onOutput(() => setOutput(providers.outputMap));
@@ -133,10 +134,22 @@
           setClickedModule(module);
           setClicked(true);
         }
-
+        useEffect(() => {
+          // Add or remove the hidden class from #root element
+          const rootElement = document.getElementById('root');
+          if (rootElement) {
+            if (isHidden) {
+              rootElement.classList.add('hidden');
+            } else {
+              rootElement.classList.remove('hidden');
+            }
+          }
+        }, [isHidden]);
 
         return (
-          <div className="app">
+          <>
+          <div className="trigger-area" onClick={() => setIsHidden(!isHidden)} />
+          <div className={`app ${isHidden ? 'hidden' : ''}`}>
             <div className="left">
               <div className="home" onClick={() => handleClick("home")}>
                 {
@@ -249,9 +262,9 @@
               )}
             </div>
           </div>
+        </>
         );
       }
     </script>
   </body>
 </html>
-
